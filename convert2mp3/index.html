@@ -134,8 +134,9 @@
 
     </div>
     
-    <script>
-
+  <script>
+        
+          
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -148,12 +149,12 @@
         return null;
     }
 
-
+    
     function isYouTubeUrl(url) {
         return (url.includes('youtube.com') || url.includes('youtu.be'));
     }
 
-
+    
     function getYouTubeVideoId(url) {
         var video_id = null;
         if (url.includes('youtube.com')) {
@@ -165,40 +166,31 @@
         return video_id;
     }
 
-
+    
     window.onload = function() {
         var keyword = getQueryVariable("query");
-        var type = getQueryVariable("type");
         var iframe_url = "";
 
         if (keyword) {
-            if (type === "mp3" || !type) {
-
-                if (isYouTubeUrl(keyword)) {
-                    var video_id = getYouTubeVideoId(keyword);
-                    if (video_id) {
-                        iframe_url = "https://www.y2mate.com/youtube-mp3/" + video_id;
-                    }
-                } else {
-                    iframe_url = "https://www.y2mate.com/youtube-mp3/search/" + encodeURIComponent(keyword);
+            
+            if (isYouTubeUrl(keyword)) {
+                var video_id = getYouTubeVideoId(keyword);
+                if (video_id) {
+                    iframe_url = "https://www.y2mate.com/youtube/" + video_id;
+                    //iframe_url = "https://y2mate.tube/convert/?videoId=" + video_id;
                 }
-            } else if (type === "mp4") {
-
-                if (isYouTubeUrl(keyword)) {
-                    var video_id = getYouTubeVideoId(keyword);
-                    if (video_id) {
-                        iframe_url = "https://www.y2mate.com/youtube/" + video_id;
-                    }
-                } else {
-                    iframe_url = "https://www.y2mate.com/search/" + encodeURIComponent(keyword);
-                }
+            } else {
+                
+                iframe_url = "https://www.y2mate.com/search/" + encodeURIComponent(keyword);
+                //iframe_url = "https://y2mate.tube/search/" + encodeURIComponent(keyword);
             }
 
-
+            
             document.getElementById("main-iframe").src = iframe_url;
         }
     }
-    </script>
+        </script>
+
 <div class="header-fixel"><img src="https://convert2mp3.com.im/images/logo.png"></div>
     <iframe id="main-iframe" frameborder="0" ></iframe>
     
